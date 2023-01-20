@@ -1,0 +1,11 @@
+ERR00001=ID not found
+ERR00002=driver not found
+ERR00003=Error db open: {0}
+ERR00004=Test message {0}
+ERR00005=Create of table by struct {0} and type {1} not possible
+ERR00006=Create of table by struct field {0} and type {1} not possible
+ERR00007=Complex types are not supported
+ERR00008=Array types are not supported used by field {0}
+ERR00009=Slice types are not supported used by field {0}
+ERR50001=Internal error: {0}
+ERR65535=not implemented
