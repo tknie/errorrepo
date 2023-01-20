@@ -1,4 +1,4 @@
-module github.com/tknie/errmsg
+module github.com/tknie/errorrepo
 
 go 1.19
 
