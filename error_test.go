@@ -9,7 +9,7 @@
 *
  */
 
-package common
+package errorrepo
 
 import (
 	"fmt"
