@@ -14,6 +14,7 @@ package errorrepo
 import (
 	"embed"
 	"fmt"
+	"io/fs"
 	"os"
 	"path"
 	"regexp"
@@ -48,6 +49,10 @@ func init() {
 	if err != nil {
 		panic("Internal config load error: " + err.Error())
 	}
+	RegisterDirectory(fss)
+}
+
+func RegisterDirectory(fss []fs.DirEntry) {
 	for _, f := range fss {
 		if f.Type().IsRegular() {
 			byteValue, err := embedFiles.ReadFile("messages/" + f.Name())
