@@ -16,10 +16,42 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
+	"github.com/tknie/log"
 )
 
-func TestErrors(t *testing.T) {
+const logPrefix = "LOG:"
 
+type OutputLog struct {
+}
+
+func (*OutputLog) Debugf(format string, args ...interface{}) {
+	fmt.Printf(logPrefix+format+"\n", args...)
+}
+
+func (*OutputLog) Infof(format string, args ...interface{}) {
+	fmt.Printf(logPrefix+format+"\n", args...)
+}
+
+func (*OutputLog) Errorf(format string, args ...interface{}) {
+	fmt.Printf(logPrefix+format+"\n", args...)
+}
+
+func (*OutputLog) Fatal(args ...interface{}) {
+	fmt.Printf(logPrefix+"%#v", args)
+}
+
+func TestMessages(t *testing.T) {
+	log.Log = &OutputLog{}
+	msg := &Message{text: "abc"}
+	assert.Equal(t, "abc", msg.convertArgs())
+	msg.text = "bcd {0} {1}"
+	assert.Equal(t, "bcd a 1", msg.convertArgs("a", 1))
+	msg.text = "cde %v %d"
+	assert.Equal(t, "cde b 1", msg.convertArgs("b", 1))
+}
+
+func TestErrors(t *testing.T) {
+	log.Log = &OutputLog{}
 	err := NewError("ERR00001")
 	assert.Nil(t, err.(*Error).err)
 	assert.Equal(t, "ERR00001: ID not found", err.Error())
@@ -33,6 +65,10 @@ func TestErrors(t *testing.T) {
 	assert.Equal(t, err, xerr.(*Error).err)
 	err = NewError("ERR65535")
 	assert.Equal(t, "ERR65535: not implemented", err.Error())
+	err = NewError("ERR50001", "testing")
+	assert.Equal(t, "ERR50001: Internal error: testing", err.Error())
+	err = NewError("ERR50002", "testing2")
+	assert.Equal(t, "ERR50002: Internal error parameter: testing2", err.Error())
 }
 
 func TestRegisterErrors(t *testing.T) {
@@ -46,6 +82,6 @@ DEV001111=abc dfdjfdkj {0} {1}
 
 	err = NewError("DEV001111", "par1", "par2", "par3")
 	assert.Nil(t, err.(*Error).err)
-	assert.Equal(t, "DEV001111: abc dfdjfdkj par1 par2", err.Error())
+	assert.Equal(t, "DEV001111: abc dfdjfdkj par1 par2%!(EXTRA string=par3)", err.Error())
 
 }

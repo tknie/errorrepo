@@ -8,4 +8,5 @@ ERR00007=Complex types are not supported
 ERR00008=Array types are not supported used by field {0}
 ERR00009=Slice types are not supported used by field {0}
 ERR50001=Internal error: {0}
+ERR50002=Internal error parameter: %v
 ERR65535=not implemented

@@ -23,6 +23,8 @@ import (
 	"github.com/tknie/log"
 )
 
+const defaultLanguage = "en"
+
 type Message struct {
 	id   string
 	text string
@@ -92,7 +94,7 @@ func RegisterMessage(locale, msgData string) error {
 		}
 		id := line[:index]
 		text := line[index+1:]
-		log.Log.Debugf("Register", locale, id)
+		log.Log.Debugf("Register %s -> %s", locale, id)
 		messageHash[id] = &Message{id, text}
 	}
 	return nil
@@ -142,13 +144,16 @@ func (e *Error) createMessage(locale string, args ...interface{}) {
 	if messageHash == nil {
 		messageHash = localesMap[language()]
 	}
+	if messageHash == nil {
+		messageHash = localesMap[defaultLanguage]
+	}
 	var outLine *Message
 	if cmsg, ok := messageHash[e.id]; ok {
 		outLine = cmsg
 	}
 	log.Log.Debugf("Get %s: %s", e.id, outLine)
 	if outLine != nil {
-		log.Log.Debugf("Search", e.id, outLine)
+		log.Log.Debugf("Search %s: %s", e.id, outLine)
 		m := outLine.text
 		if len(args) > 0 {
 			m = outLine.convertArgs(args...)
@@ -162,11 +167,8 @@ func (e *Error) createMessage(locale string, args ...interface{}) {
 // convertArgs define replace arguments
 func (m *Message) convertArgs(args ...interface{}) string {
 	msg := m.text
-	for i, x := range args {
-		m := fmt.Sprintf("%v", x)
-		c := fmt.Sprintf("\\{%d\\}", i)
-		re := regexp.MustCompile(c)
-		msg = re.ReplaceAllString(msg, m)
-	}
-	return msg
+	c := `\{\d\}`
+	re := regexp.MustCompile(c)
+	msg = re.ReplaceAllString(msg, "%v")
+	return fmt.Sprintf(msg, args...)
 }
