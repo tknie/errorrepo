@@ -138,9 +138,14 @@ func (e *Error) ID() string {
 	return e.id
 }
 
+// Message provide the error message only
+func (e *Error) Message() string {
+	return e.msg
+}
+
 // Error provide error interface
 func (e *Error) Error() string {
-	return e.msg
+	return fmt.Sprintf("%8s: %s", e.id, e.msg)
 }
 
 // createMessage create a new message with locale and given args
@@ -163,7 +168,8 @@ func (e *Error) createMessage(locale string, args ...interface{}) {
 		if len(args) > 0 {
 			m = outLine.convertArgs(args...)
 		}
-		e.msg = fmt.Sprintf("%8s: %s", e.id, m)
+		// e.msg = fmt.Sprintf("%8s: %s", e.id, m)
+		e.msg = m
 	} else {
 		e.msg = fmt.Sprintf("Unknown error ...%s", e.id)
 	}

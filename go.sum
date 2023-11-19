@@ -11,8 +11,10 @@ github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/
 github.com/stretchr/testify v1.8.0/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO+kdMU+MU=
 github.com/stretchr/testify v1.8.1 h1:w7B6lhMri9wdJUVmEZPGGhZzrYTPvgJArz7wNPgYKsk=
 github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o6fzry7u4=
-github.com/tknie/log v0.0.0-20230120141241-a2908dede155 h1:++S05Gx8gpp7uu/ouKpNzn9TquBKbckiWkwA1XkcsMo=
-github.com/tknie/log v0.0.0-20230120141241-a2908dede155/go.mod h1:W67unT0xxqTLc9tyxpdV1lED/JuD0veFgxT/astdxt4=
+github.com/tknie/log v0.0.0-20230429175804-66867a7f7c54 h1:kpo9mbYUsygdb+wOojm5jmtmxdZAKwYgACs045oEC00=
+github.com/tknie/log v0.0.0-20230429175804-66867a7f7c54/go.mod h1:W67unT0xxqTLc9tyxpdV1lED/JuD0veFgxT/astdxt4=
+github.com/tknie/log v0.0.0-20231006083545-fabe25f4fb0e h1:aNgWs7XTC4vcIcmzQT496neJexEvjx0Kv2/ho2xUlgo=
+github.com/tknie/log v0.0.0-20231006083545-fabe25f4fb0e/go.mod h1:W67unT0xxqTLc9tyxpdV1lED/JuD0veFgxT/astdxt4=
 go.uber.org/atomic v1.7.0 h1:ADUqmZGgLDDfbSL9ZmPxKTybcoEYHgpYfELNoN+7hsw=
 go.uber.org/multierr v1.6.0 h1:y6IPFStTAIT5Ytl7/XYmHvzXQ7S3g/IeZW9hyZ5thw4=
 go.uber.org/zap v1.24.0 h1:FiJd5l1UOLj0wCgbSE0rwwXHzEdAZS6hiiSnxJN/D60=
