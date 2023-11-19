@@ -36,6 +36,10 @@ func (*OutputLog) Errorf(format string, args ...interface{}) {
 	fmt.Printf(logPrefix+format+"\n", args...)
 }
 
+func (*OutputLog) Fatalf(format string, args ...interface{}) {
+	fmt.Printf(logPrefix+format+"\n", args...)
+}
+
 func (*OutputLog) Fatal(args ...interface{}) {
 	fmt.Printf(logPrefix+"%#v", args)
 }
