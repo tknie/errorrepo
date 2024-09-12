@@ -120,8 +120,8 @@ func NewErrorLocale(locale, errID string, args ...interface{}) error {
 	}
 	e := &Error{id: errID, err: err}
 	e.createMessage(locale, args...)
-	log.Log.Errorf("Error %s created: %v", errID, err)
-	log.Log.Debugf("Generic error message created:[%s] %s", errID, e.msg)
+	log.Log.Debugf("Error %s created: %v", errID, err)
+	log.Log.Debugf("Error message created:[%s] %s", errID, e.msg)
 	log.Log.Debugf("Stack trace:\n%s", string(debug.Stack()))
 
 	return e
